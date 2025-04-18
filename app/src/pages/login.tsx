@@ -47,17 +47,19 @@ export default function Login({ urlProps }: { urlProps: Record<string, any> }) {
 						<AuthorizerMagicLinkLogin urlProps={urlProps} />
 					)}
 					<Footer>
-						<Link
-							to="#"
-							onClick={() => setView(VIEW_TYPES.FORGOT_PASSWORD)}
-							style={{ marginBottom: 10 }}
-						>
-							Forgot Password?
-						</Link>
+						{!config.is_basic_authentication_enabled && (
+							<Link
+								to="#"
+								onClick={() => setView(VIEW_TYPES.FORGOT_PASSWORD)}
+								style={{ marginBottom: 10 }}
+							>
+								Forgot Password?
+							</Link>
+						)}
 					</Footer>
 				</Fragment>
 			)}
-			{view === VIEW_TYPES.FORGOT_PASSWORD && (
+			{view === VIEW_TYPES.FORGOT_PASSWORD && !config.is_basic_authentication_enabled && (
 				<Fragment>
 					<h1 style={{ textAlign: 'center' }}>Forgot Password</h1>
 					<AuthorizerForgotPassword
